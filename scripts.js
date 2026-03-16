@@ -26,17 +26,16 @@
     }
   });
 
-  // -------- NAVEGAÇÃO POR SETAS + ENTER (descer reto) --------
 // -----------------------------
 // NAVEGAÇÃO TIPO PLANILHA
 // -----------------------------
 
 const inputs = Array.from(document.querySelectorAll("input.calc"));
-const cols = 7; // quantidade de colunas de inputs
+const cols = 7; // quantidade de colunas
 
 inputs.forEach((inp, index) => {
 
-  // selecionar número automaticamente
+  // selecionar automaticamente
   inp.addEventListener("focus", () => {
     inp.select();
   });
