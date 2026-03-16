@@ -14,6 +14,8 @@ body{
   padding:18px;
 }
 
+/* HEADER */
+
 .header{
   display:flex;
   align-items:center;
@@ -26,7 +28,6 @@ body{
   width:84px;
   height:auto;
   object-fit:contain;
-  opacity:0.98;
 }
 
 .header .titulos{
@@ -40,7 +41,6 @@ body{
   color:var(--accent);
   font-size:24px;
   text-align:center;
-  text-shadow:0 1px 3px rgba(0,0,0,.6);
 }
 
 .header h2{
@@ -50,16 +50,9 @@ body{
   font-size:18px;
   font-weight:600;
   text-align:center;
-  text-shadow:0 1px 3px rgba(0,0,0,.4);
 }
 
-/* garantir mesma cor */
-.header h1,
-.header h2{
-  color:var(--accent) !important;
-}
-
-/* Tabela */
+/* TABELA */
 
 table{
   width:100%;
@@ -76,23 +69,20 @@ thead th{
   color:#fff;
   font-weight:700;
   text-align:center;
-  border-bottom:1px solid rgba(255,255,255,.03);
 }
 
 tbody td{
   padding:12px;
   text-align:center;
   border-top:1px solid rgba(255,255,255,.03);
-  color:#e6eef3;
 }
 
 tbody td:first-child{
   text-align:left;
   padding-left:20px;
-  color:#dbe6ee;
 }
 
-/* Linhas de categoria */
+/* CATEGORIAS */
 
 tr.category td{
   background:rgba(240,212,138,.06);
@@ -102,7 +92,7 @@ tr.category td{
   padding-left:16px;
 }
 
-/* Inputs */
+/* INPUTS */
 
 input.calc{
   width:72px;
@@ -112,11 +102,12 @@ input.calc{
   background:#f6f8fa;
   text-align:center;
   font-weight:600;
+  outline:none;
 }
 
-/* remover setas do input number */
+/* REMOVE BOTÕES NUMBER */
 
-/* Chrome, Edge, Opera */
+/* Chrome, Edge, Safari */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button{
   -webkit-appearance:none;
@@ -125,17 +116,18 @@ input[type=number]::-webkit-outer-spin-button{
 
 /* Firefox */
 input[type=number]{
+  appearance:textfield;
   -moz-appearance:textfield;
 }
 
-/* Totais */
+/* TOTAL */
 
 .total{
   color:var(--col);
   font-weight:700;
 }
 
-/* cores por coluna */
+/* CORES COLUNAS */
 
 th.bp1, td.bp1{background:rgba(80,120,200,.12)}
 th.bp2, td.bp2{background:rgba(96,140,96,.10)}
@@ -145,7 +137,7 @@ th.bp5, td.bp5{background:rgba(140,90,150,.08)}
 th.bp6, td.bp6{background:rgba(120,120,120,.06)}
 th.rpm, td.rpm{background:rgba(80,200,255,.08)}
 
-/* Responsivo */
+/* RESPONSIVO */
 
 @media(max-width:900px){
 
