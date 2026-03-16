@@ -1,406 +1,287 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <title>CPChq - Calculadora</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-    /* --- estilo simplificado / dark --- */
-    :root{--bg:#16191c;--card:#23272b;--muted:#8a939a;--accent:#f0d48a;--col: #66ccff}
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#e6eef3;padding:18px}
-    .header{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:18px}
-    .header img{width:84px;height:auto;object-fit:contain;opacity:0.98}
-    .header h1{margin:0;color:var(--accent);font-size:24px;text-align:center;text-shadow:0 1px 3px rgba(0,0,0,.6)}
-    .header h2{margin:0;color:var(--accent);font-size:18px;font-weight:500;text-align:center;text-shadow:0 1px 3px rgba(0,0,0,.6)}
-    table{width:100%;border-collapse:collapse;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.5)}
-    thead th{padding:12px 10px;background:#2f3740;color:#fff;font-weight:700;text-align:center;border-bottom:1px solid rgba(255,255,255,.03)}
-    tbody td{padding:12px;text-align:center;border-top:1px solid rgba(255,255,255,.03);color:#e6eef3}
-    tbody td:first-child{text-align:left;padding-left:20px;color:#dbe6ee}
-    tr.category td{background:rgba(240,212,138,.06);font-weight:700;color:var(--accent);text-align:left;padding-left:16px}
-    input.calc{width:72px;padding:6px;border-radius:6px;border:1px solid #444;background:#f6f8fa;text-align:center;font-weight:600}
-    .total{color:var(--col);font-weight:700}
-    /* cores por coluna (cabeçalho + colunas) */
-    th.bp1, td.bp1{background:rgba(80,120,200,.12)}
-    th.bp2, td.bp2{background:rgba(96,140,96,.10)}
-    th.bp3, td.bp3{background:rgba(200,180,120,.08)}
-    th.bp4, td.bp4{background:rgba(170,130,40,.08)}
-    th.bp5, td.bp5{background:rgba(140,90,150,.08)}
-    th.bp6, td.bp6{background:rgba(120,120,120,.06)}
-    th.rpm, td.rpm{background:rgba(80,200,255,.08)}
-    /* responsivo */
-    @media(max-width:900px){
-      .header img{width:56px}
-      input.calc{width:56px}
-      thead th{font-size:12px;padding:8px}
-      tbody td{padding:8px}
-    }
-  </style>
+<meta charset="utf-8">
+<title>CPChq - Calculadora</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<style>
+
+/* REMOVE BOTÕES DO INPUT NUMBER */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{
+    -webkit-appearance:none;
+    margin:0;
+}
+
+input[type=number]{
+    -moz-appearance:textfield;
+}
+
+/* --- estilo --- */
+:root{
+--bg:#16191c;
+--card:#23272b;
+--accent:#f0d48a;
+--col:#66ccff;
+}
+
+body{
+margin:0;
+font-family:Arial;
+background:var(--bg);
+color:#fff;
+padding:18px;
+}
+
+.header{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:20px;
+margin-bottom:20px;
+}
+
+.header img{
+width:80px;
+}
+
+.header h1{
+margin:0;
+color:var(--accent);
+font-size:24px;
+text-align:center;
+}
+
+.header h2{
+margin:0;
+color:var(--accent);
+font-size:18px;
+text-align:center;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:var(--card);
+border-radius:8px;
+overflow:hidden;
+}
+
+thead th{
+padding:10px;
+background:#2f3740;
+}
+
+tbody td{
+padding:10px;
+text-align:center;
+}
+
+tbody td:first-child{
+text-align:left;
+padding-left:15px;
+}
+
+tr.category td{
+background:rgba(240,212,138,.05);
+font-weight:bold;
+color:var(--accent);
+}
+
+input.calc{
+width:70px;
+padding:5px;
+border-radius:6px;
+border:1px solid #444;
+text-align:center;
+font-weight:bold;
+}
+
+.total{
+color:var(--col);
+font-weight:bold;
+}
+
+</style>
 </head>
+
 <body>
 
- <div class="header">
-    <img src="img/coruja.png" class="coruja" alt="coruja esquerda">
+<div class="header">
 
-    <div class="titulos">
-        <h1>COMANDO DE POLÍCIA DE CHOQUE</h1>
-        <h2>AGÊNCIA REGIONAL DE INTELIGÊNCIA</h2>
-    </div>
+<img src="img/coruja.png">
 
-    <img src="img/coruja.png" class="coruja" alt="coruja direita">
+<div>
+<h1>COMANDO DE POLÍCIA DE CHOQUE</h1>
+<h2>AGÊNCIA REGIONAL DE INTELIGÊNCIA</h2>
 </div>
 
+<img src="img/coruja.png">
 
+</div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Drogas / Itens</th>
-        <th class="bp1">1° BPChq</th>
-        <th class="bp2">2° BPChq</th>
-        <th class="bp3">3° BPChq</th>
-        <th class="bp4">4° BPChq</th>
-        <th class="bp5">5° BPChq</th>
-        <th class="bp6">6° BPChq</th>
-        <th class="rpm">4° RPmon</th>
-        <th>Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="category"><td colspan="9">INDICADORES</td></tr>
+<table>
 
-      <tr>
-        <td>Prisões</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0</td>
-      </tr>
+<thead>
+<tr>
+<th>Drogas / Itens</th>
+<th>1° BPChq</th>
+<th>2° BPChq</th>
+<th>3° BPChq</th>
+<th>4° BPChq</th>
+<th>5° BPChq</th>
+<th>6° BPChq</th>
+<th>4° RPmon</th>
+<th>Total</th>
+</tr>
+</thead>
 
-      <tr>
-        <td>Foragidos</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0</td>
-      </tr>
+<tbody>
 
-      <tr>
-        <td>Dinheiro</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0</td>
-      </tr>
-
-      <tr class="category"><td colspan="9">DROGAS</td></tr>
-
-      <tr data-unit="g">
-        <td>Cocaína</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0g</td>
-      </tr>
-
-      <tr data-unit="g">
-        <td>Maconha</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0g</td>
-      </tr>
-
-      <tr data-unit="g">
-        <td>Crack</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0g</td>
-      </tr>
-
-      <tr data-unit="g">
-        <td>MDMA</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0g</td>
-      </tr>
-
-      <tr data-unit="g">
-        <td>Ecstasy</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0g</td>
-      </tr>
-
-      <tr data-unit="g">
-        <td>Outros</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0g</td>
-      </tr>
-
-       <tr data-unit="un"> 
-  <td>Outras drogas</td>
-  <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-  <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-  <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-  <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-  <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-  <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-  <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-  <td class="total">0</td>
+<tr class="category">
+<td colspan="9">INDICADORES</td>
 </tr>
 
-      <tr class="category"><td colspan="9">APREENSÕES</td></tr>
+<tr>
+<td>Prisões</td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td class="total">0</td>
+</tr>
 
-      <tr>
-        <td>Armas de fogo</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0</td>
-      </tr>
+<tr>
+<td>Foragidos</td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td class="total">0</td>
+</tr>
 
-      <tr>
-        <td>Munições</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0</td>
-      </tr>
+<tr class="category">
+<td colspan="9">DROGAS</td>
+</tr>
 
-      <tr>
-        <td>Celulares</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0</td>
-      </tr>
+<tr data-unit="g">
+<td>Cocaína</td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td class="total">0g</td>
+</tr>
 
-      <tr>
-        <td>Veículos recuperados</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0</td>
-      </tr>
+<tr data-unit="g">
+<td>Maconha</td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td class="total">0g</td>
+</tr>
 
-      </tr>
-      <td>Veículos apreendidos</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0</td>
-      </tr>
-    </tbody>
-  </table>
+<tr data-unit="un">
+<td>Outras drogas</td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td class="total">0un</td>
+</tr>
+
+</tbody>
+
+</table>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
 
-  function recalcularTodasLinhas() {
-    const linhas = document.querySelectorAll('table tbody tr');
-    linhas.forEach(linha => {
-      // pula linhas de categoria (sem inputs)
-      const inputs = Array.from(linha.querySelectorAll('input.calc'));
-      if (inputs.length === 0) return;
+const inputs = Array.from(document.querySelectorAll("input.calc"))
 
-      // encontra célula total
-      let campoTotal = linha.querySelector('.total');
-      if (!campoTotal) {
-        const tds = linha.querySelectorAll('td');
-        campoTotal = tds[tds.length - 1];
-      }
-      if (!campoTotal) return;
+function recalcular(){
 
-      // soma valores
-      let soma = 0;
-      inputs.forEach(inp => {
-        const raw = (inp.value || '').toString().trim();
-        if (raw === '') return;
-        const normalized = raw.replace(',', '.');
-        const v = parseFloat(normalized);
-        if (!isNaN(v)) soma += v;
-      });
+const linhas = document.querySelectorAll("tbody tr")
 
-      // verifica unidade (data-unit="g") e formata
-      const unidade = linha.dataset.unit || '';
-      campoTotal.textContent = unidade ? `${soma}${unidade}` : soma;
-    });
-  }
+linhas.forEach(linha=>{
 
-  // delegação global: sempre que qualquer input.calc mudar, recalcula
-  document.body.addEventListener('input', (e) => {
-    if (e.target && e.target.matches('input.calc')) {
-      recalcularTodasLinhas();
-    }
-  });
+const campos = linha.querySelectorAll("input.calc")
 
-  // recalcula ao abrir (se houver valores já preenchidos)
-  recalcularTodasLinhas();
+if(campos.length==0)return
 
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
+let soma=0
 
-  const inputs = Array.from(document.querySelectorAll("input.calc"));
+campos.forEach(c=>{
+const v=parseFloat(c.value)
+if(!isNaN(v))soma+=v
+})
 
-  function recalcularTodasLinhas() {
-    const linhas = document.querySelectorAll('table tbody tr');
-    linhas.forEach(linha => {
-      const inputs = Array.from(linha.querySelectorAll('input.calc'));
-      if (inputs.length === 0) return;
+const total=linha.querySelector(".total")
 
-      let campoTotal = linha.querySelector('.total');
-      if (!campoTotal) {
-        const tds = linha.querySelectorAll('td');
-        campoTotal = tds[tds.length - 1];
-      }
-      if (!campoTotal) return;
+const unidade=linha.dataset.unit || ""
 
-      let soma = 0;
-      inputs.forEach(inp => {
-        const raw = (inp.value || '').toString().trim();
-        if (raw === '') return;
-        const normalized = raw.replace(',', '.');
-        const v = parseFloat(normalized);
-        if (!isNaN(v)) soma += v;
-      });
+total.textContent=unidade? soma+unidade : soma
 
-      const unidade = linha.dataset.unit || '';
-      campoTotal.textContent = unidade ? `${soma}${unidade}` : soma;
-    });
-  }
-
-  document.body.addEventListener('input', (e) => {
-    if (e.target.matches('input.calc')) {
-      recalcularTodasLinhas();
-    }
-  });
-
-  // -----------------------------
-  // NAVEGAÇÃO COM SETAS DO TECLADO
-  // -----------------------------
-  inputs.forEach((inp, index) => {
-    inp.addEventListener("keydown", (e) => {
-      const cols = 8; // número de colunas de inputs por linha
-
-     switch (e.key) {
-
-  case "ArrowRight":
-    if (inputs[index + 1]) inputs[index + 1].focus();
-    e.preventDefault();
-    break;
-
-  case "ArrowLeft":
-    if (inputs[index - 1]) inputs[index - 1].focus();
-    e.preventDefault();
-    break;
-
-  case "ArrowDown":
-  case "Enter":
-    if (inputs[index + cols]) inputs[index + cols].focus();
-    e.preventDefault();
-    break;
-
-  case "ArrowUp":
-    if (inputs[index - cols]) inputs[index - cols].focus();
-    e.preventDefault();
-    break;
+})
 
 }
 
+document.addEventListener("input",e=>{
+if(e.target.classList.contains("calc"))recalcular()
+})
 
-  // -----------------------------
-  // SALVAR E CARREGAR COM LOCALSTORAGE
-  // -----------------------------
-  function salvarDados() {
-    const dados = inputs.map(input => input.value);
-    localStorage.setItem("cpchq_dados", JSON.stringify(dados));
-    alert("Dados salvos com sucesso!");
-  }
+inputs.forEach((input,index)=>{
 
-  function carregarDados() {
-    const dadosSalvos = localStorage.getItem("cpchq_dados");
-    if (!dadosSalvos) return;
+input.addEventListener("keydown",e=>{
 
-    const dados = JSON.parse(dadosSalvos);
-    inputs.forEach((inp, i) => {
-      if (dados[i] !== undefined) inp.value = dados[i];
-    });
+const colunas=7
 
-    recalcularTodasLinhas();
-  }
+switch(e.key){
 
-  function limparDados() {
-    if (confirm("Deseja apagar todos os dados salvos?")) {
-      localStorage.removeItem("cpchq_dados");
-      inputs.forEach(inp => inp.value = "");
-      recalcularTodasLinhas();
-    }
-  }
+case "ArrowRight":
+if(inputs[index+1])inputs[index+1].focus()
+break
 
-  carregarDados(); // carrega ao abrir
+case "ArrowLeft":
+if(inputs[index-1])inputs[index-1].focus()
+break
 
- 
+case "ArrowDown":
+case "Enter":
+if(inputs[index+colunas])inputs[index+colunas].focus()
+break
+
+case "ArrowUp":
+if(inputs[index-colunas])inputs[index-colunas].focus()
+break
+
+default:return
+}
+
+e.preventDefault()
+
+})
+
+})
+
+</script>
+
+</body>
+</html>
 
