@@ -29,37 +29,38 @@ body{
   opacity:0.98;
 }
 
-.header h1 {
-    margin:0;
-    color:var(--accent);
-    font-size:24px;
-    text-align:center;
-    text-shadow:0 1px 3px rgba(0,0,0,.6);
+.header .titulos{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
-.header .titulos {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.header h1{
+  margin:0;
+  color:var(--accent);
+  font-size:24px;
+  text-align:center;
+  text-shadow:0 1px 3px rgba(0,0,0,.6);
 }
 
 .header h2{
-    margin:0;
-    margin-top:4px;
-    color:var(--accent);
-    font-size:18px;
-    font-weight:600;
-    text-align:center;
-    text-shadow:0 1px 3px rgba(0,0,0,.4);
+  margin:0;
+  margin-top:4px;
+  color:var(--accent);
+  font-size:18px;
+  font-weight:600;
+  text-align:center;
+  text-shadow:0 1px 3px rgba(0,0,0,.4);
 }
 
-/* Garantir mesma cor para os dois */
+/* garantir mesma cor */
 .header h1,
-.header h2 {
-    color: var(--accent) !important;
+.header h2{
+  color:var(--accent) !important;
 }
 
-/* 📌 Tabela */
+/* Tabela */
+
 table{
   width:100%;
   border-collapse:collapse;
@@ -92,6 +93,7 @@ tbody td:first-child{
 }
 
 /* Linhas de categoria */
+
 tr.category td{
   background:rgba(240,212,138,.06);
   font-weight:700;
@@ -101,6 +103,7 @@ tr.category td{
 }
 
 /* Inputs */
+
 input.calc{
   width:72px;
   padding:6px;
@@ -116,29 +119,24 @@ input.calc{
 /* Chrome, Edge, Opera */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button{
-  -webkit-appearance: none;
-  margin: 0;
+  -webkit-appearance:none;
+  margin:0;
 }
 
 /* Firefox */
 input[type=number]{
-  -moz-appearance: textfield;
+  -moz-appearance:textfield;
 }
 
-/* Remover setas ↑ ↓ */
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button{
-  -webkit-appearance: none;
-  margin:0;
-}
-input[type=number]{ -moz-appearance:textfield; }
+/* Totais */
 
 .total{
   color:var(--col);
   font-weight:700;
 }
 
-/* Cores específicas */
+/* cores por coluna */
+
 th.bp1, td.bp1{background:rgba(80,120,200,.12)}
 th.bp2, td.bp2{background:rgba(96,140,96,.10)}
 th.bp3, td.bp3{background:rgba(200,180,120,.08)}
@@ -148,18 +146,24 @@ th.bp6, td.bp6{background:rgba(120,120,120,.06)}
 th.rpm, td.rpm{background:rgba(80,200,255,.08)}
 
 /* Responsivo */
+
 @media(max-width:900px){
-  .header img{width:56px}
-  input.calc{width:56px}
-  thead th{font-size:12px;padding:6px}
-  tbody td{padding:6px}
-}
 
-/* Remover setas ↑ ↓ */
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button{
-  -webkit-appearance: none;
-  margin:0;
-}
+  .header img{
+    width:56px;
+  }
 
-input[type=number]{ -moz-appearance:textfield; }
+  input.calc{
+    width:56px;
+  }
+
+  thead th{
+    font-size:12px;
+    padding:6px;
+  }
+
+  tbody td{
+    padding:6px;
+  }
+
+}
