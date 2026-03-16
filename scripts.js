@@ -27,91 +27,54 @@
   });
 
   // -------- NAVEGAÇÃO POR SETAS + ENTER (descer reto) --------
-document.querySelectorAll("input.calc").forEach(inp => {
-  inp.addEventListener("keydown", (e) => {
-    const td = inp.closest("td");
-    const tr = inp.closest("tr");
-    if (!td || !tr) return;
+// -----------------------------
+// NAVEGAÇÃO TIPO PLANILHA
+// -----------------------------
 
-    const colIndex = td.cellIndex;
-    let alvo = null;
+const inputs = Array.from(document.querySelectorAll("input.calc"));
+const cols = 7; // quantidade de colunas de inputs
 
-    const key = e.key;
+inputs.forEach((inp, index) => {
 
-    // ENTER comporta-se como seta para baixo
-    const descida = (key === "ArrowDown");
-    const subida = (key === "ArrowUp");
-    const esquerda = (key === "ArrowLeft");
-    const direita = (key === "ArrowRight");
-
-    if (descida) {
-      let next = tr.nextElementSibling;
-      while (next) {
-        const cell = next.children[colIndex];
-        if (cell) {
-          const candidate = cell.querySelector("input.calc");
-          if (candidate) {
-            alvo = candidate;
-            break;
-          }
-        }
-        next = next.nextElementSibling;
-      }
-    }
-
-    if (subida) {
-      let prev = tr.previousElementSibling;
-      while (prev) {
-        const cell = prev.children[colIndex];
-        if (cell) {
-          const candidate = cell.querySelector("input.calc");
-          if (candidate) {
-            alvo = candidate;
-            break;
-          }
-        }
-        prev = prev.previousElementSibling;
-      }
-    }
-
-    if (esquerda) {
-      let left = colIndex - 1;
-      while (left >= 0) {
-        const cell = tr.children[left];
-        if (cell) {
-          const candidate = cell.querySelector("input.calc");
-          if (candidate) {
-            alvo = candidate;
-            break;
-          }
-        }
-        left--;
-      }
-    }
-
-    if (direita) {
-      let right = colIndex + 1;
-      while (right < tr.children.length) {
-        const cell = tr.children[right];
-        if (cell) {
-          const candidate = cell.querySelector("input.calc");
-          if (candidate) {
-            alvo = candidate;
-            break;
-          }
-        }
-        right++;
-      }
-    }
-
-    if (alvo) {
-      e.preventDefault();
-      alvo.focus();
-      alvo.select();
-    }
+  // selecionar número automaticamente
+  inp.addEventListener("focus", () => {
+    inp.select();
   });
-});
 
+  inp.addEventListener("keydown", (e) => {
+
+    switch (e.key) {
+
+      case "ArrowRight":
+        if (inputs[index + 1]) inputs[index + 1].focus();
+        e.preventDefault();
+        break;
+
+      case "ArrowLeft":
+        if (inputs[index - 1]) inputs[index - 1].focus();
+        e.preventDefault();
+        break;
+
+      case "ArrowDown":
+        if (inputs[index + cols]) inputs[index + cols].focus();
+        e.preventDefault();
+        break;
+
+      case "ArrowUp":
+        if (inputs[index - cols]) inputs[index - cols].focus();
+        e.preventDefault();
+        break;
+
+      case "Enter":
+        if (inputs[index + cols]) inputs[index + cols].focus();
+        e.preventDefault();
+        break;
+
+    }
+
+  });
+
+});
 
   // -------- SALVAR AUTOMATICAMENTE (LOCALSTORAGE) --------
   function gerarID(linha, coluna) {
