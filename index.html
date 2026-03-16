@@ -345,22 +345,31 @@ document.addEventListener('DOMContentLoaded', () => {
     inp.addEventListener("keydown", (e) => {
       const cols = 8; // número de colunas de inputs por linha
 
-      switch (e.key) {
-        case "ArrowRight":
-          if (inputs[index + 1]) inputs[index + 1].focus();
-          break;
-        case "ArrowLeft":
-          if (inputs[index - 1]) inputs[index - 1].focus();
-          break;
-        case "ArrowDown":
-          if (inputs[index + cols]) inputs[index + cols].focus();
-          break;
-        case "ArrowUp":
-          if (inputs[index - cols]) inputs[index - cols].focus();
-          break;
-      }
-    });
-  });
+     switch (e.key) {
+
+  case "ArrowRight":
+    if (inputs[index + 1]) inputs[index + 1].focus();
+    e.preventDefault();
+    break;
+
+  case "ArrowLeft":
+    if (inputs[index - 1]) inputs[index - 1].focus();
+    e.preventDefault();
+    break;
+
+  case "ArrowDown":
+  case "Enter":
+    if (inputs[index + cols]) inputs[index + cols].focus();
+    e.preventDefault();
+    break;
+
+  case "ArrowUp":
+    if (inputs[index - cols]) inputs[index - cols].focus();
+    e.preventDefault();
+    break;
+
+}
+
 
   // -----------------------------
   // SALVAR E CARREGAR COM LOCALSTORAGE
@@ -393,22 +402,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   carregarDados(); // carrega ao abrir
 
-  // cria botões na tela
-  const botoes = document.createElement("div");
-  botoes.style.margin = "20px 0";
-  botoes.innerHTML = `
-    <button id="btnSalvar" style="padding:10px 20px;font-weight:bold;">Salvar dados</button>
-    <button id="btnLimpar" style="padding:10px 20px;font-weight:bold;margin-left:10px;">Limpar</button>
-  `;
-  document.body.prepend(botoes);
-
-  document.getElementById("btnSalvar").onclick = salvarDados;
-  document.getElementById("btnLimpar").onclick = limparDados;
-
-  recalcularTodasLinhas();
-});
-</script>
-
-</body>
-</html>
+ 
 
