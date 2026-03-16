@@ -1,73 +1,68 @@
 
-  document.addEventListener("DOMContentLoaded", () => {
-
-  // -------- SOMAR AUTOMATICAMENTE --------
-  function recalcular() {
-    document.querySelectorAll("tbody tr").forEach((linha) => {
-      const inputs = linha.querySelectorAll("input.calc");
-      if (!inputs.length) return;
-
-      let total = 0;
-      inputs.forEach(inp => {
-        const val = parseFloat((inp.value || "0").replace(",", ".")) || 0;
-        total += val;
-      });
-
-      const unidade = linha.dataset.unit || "";
-      const campo = linha.querySelector(".total");
-      campo.textContent = unidade ? `${total}${unidade}` : total;
-    });
-  }
-
-  document.body.addEventListener("input", e => {
-    if (e.target.matches("input.calc")) {
-      salvarLocal(e.target);
-      recalcular();
-    }
-  });
-
-// -----------------------------
-// NAVEGAÇÃO TIPO PLANILHA
-// -----------------------------
+  document.addEventListener('DOMContentLoaded', () => {
 
 const inputs = Array.from(document.querySelectorAll("input.calc"));
-const cols = 7; // quantidade de colunas
+
+function recalcularTodasLinhas() {
+  const linhas = document.querySelectorAll('table tbody tr');
+
+  linhas.forEach(linha => {
+
+    const inputsLinha = Array.from(linha.querySelectorAll('input.calc'));
+    if (inputsLinha.length === 0) return;
+
+    let campoTotal = linha.querySelector('.total');
+    if (!campoTotal) {
+      const tds = linha.querySelectorAll('td');
+      campoTotal = tds[tds.length - 1];
+    }
+
+    let soma = 0;
+
+    inputsLinha.forEach(inp => {
+      const valor = parseFloat(inp.value.replace(",", ".")) || 0;
+      soma += valor;
+    });
+
+    const unidade = linha.dataset.unit || '';
+    campoTotal.textContent = unidade ? soma + unidade : soma;
+
+  });
+}
+
+document.body.addEventListener("input", e => {
+  if (e.target.matches("input.calc")) recalcularTodasLinhas();
+});
+
 
 inputs.forEach((inp, index) => {
 
-  // selecionar automaticamente
-  inp.addEventListener("focus", () => {
-    inp.select();
-  });
+  inp.addEventListener("keydown", e => {
 
-  inp.addEventListener("keydown", (e) => {
+    const cols = 7;
 
-    switch (e.key) {
+    switch(e.key){
 
       case "ArrowRight":
-        if (inputs[index + 1]) inputs[index + 1].focus();
+        if(inputs[index+1]) inputs[index+1].focus();
         e.preventDefault();
-        break;
+      break;
 
       case "ArrowLeft":
-        if (inputs[index - 1]) inputs[index - 1].focus();
+        if(inputs[index-1]) inputs[index-1].focus();
         e.preventDefault();
-        break;
+      break;
 
       case "ArrowDown":
-        if (inputs[index + cols]) inputs[index + cols].focus();
+      case "Enter":
+        if(inputs[index+cols]) inputs[index+cols].focus();
         e.preventDefault();
-        break;
+      break;
 
       case "ArrowUp":
-        if (inputs[index - cols]) inputs[index - cols].focus();
+        if(inputs[index-cols]) inputs[index-cols].focus();
         e.preventDefault();
-        break;
-
-      case "Enter":
-        if (inputs[index + cols]) inputs[index + cols].focus();
-        e.preventDefault();
-        break;
+      break;
 
     }
 
@@ -75,30 +70,6 @@ inputs.forEach((inp, index) => {
 
 });
 
-  // -------- SALVAR AUTOMATICAMENTE (LOCALSTORAGE) --------
-  function gerarID(linha, coluna) {
-    return `campo_l${linha}_c${coluna}`;
-  }
+recalcularTodasLinhas();
 
-  const linhas = document.querySelectorAll("tbody tr");
-  linhas.forEach((tr, linhaI) => {
-    const inputs = tr.querySelectorAll("input.calc");
-
-    inputs.forEach((inp, colI) => {
-      const id = gerarID(linhaI, colI);
-      inp.dataset.id = id;
-
-      const salvo = localStorage.getItem(id);
-      if (salvo !== null) inp.value = salvo;
-    });
-  });
-
-  function salvarLocal(inp) {
-    localStorage.setItem(inp.dataset.id, inp.value);
-  }
-
-  // carregar totals ao abrir
-  recalcular();
-
-  
 });
