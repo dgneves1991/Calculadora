@@ -7,100 +7,128 @@
 
 <style>
 
-/* REMOVE BOTÕES DO INPUT NUMBER */
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button{
-    -webkit-appearance:none;
-    margin:0;
-}
-
-input[type=number]{
-    -moz-appearance:textfield;
-}
-
-/* --- estilo --- */
+/* CORES */
 :root{
---bg:#16191c;
---card:#23272b;
---accent:#f0d48a;
---col:#66ccff;
+  --bg:#16191c;
+  --card:#23272b;
+  --accent:#f0d48a;
+  --col:#66ccff;
 }
 
 body{
-margin:0;
-font-family:Arial;
-background:var(--bg);
-color:#fff;
-padding:18px;
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:#e6eef3;
+  padding:18px;
 }
 
+/* HEADER */
 .header{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:20px;
-margin-bottom:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  margin-bottom:18px;
 }
 
-.header img{
-width:80px;
+.header img{width:70px;}
+
+.header .titulos{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
-.header h1{
-margin:0;
-color:var(--accent);
-font-size:24px;
-text-align:center;
+.header h1, .header h2{
+  margin:0;
+  color:var(--accent);
+  text-align:center;
 }
 
-.header h2{
-margin:0;
-color:var(--accent);
-font-size:18px;
-text-align:center;
+/* BOTÕES */
+.acoes{
+  margin-bottom:15px;
+  display:flex;
+  gap:10px;
 }
 
+.btn-salvar, .btn-limpar{
+  padding:10px 16px;
+  border:none;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+  transition:all .2s ease;
+  background:#fff;
+  color:#000;
+}
+
+/* HOVER */
+.btn-salvar:hover, .btn-limpar:hover{
+  background:#f2f2f2;
+  transform:translateY(-1px);
+}
+
+/* DETALHE DE COR */
+.btn-salvar{
+  border-left:5px solid var(--col);
+}
+
+.btn-limpar{
+  border-left:5px solid #ff5c5c;
+}
+
+/* TABELA */
 table{
-width:100%;
-border-collapse:collapse;
-background:var(--card);
-border-radius:8px;
-overflow:hidden;
+  width:100%;
+  border-collapse:collapse;
+  background:var(--card);
+  border-radius:8px;
+  overflow:hidden;
 }
 
 thead th{
-padding:10px;
-background:#2f3740;
+  padding:10px;
+  background:#2f3740;
 }
 
 tbody td{
-padding:10px;
-text-align:center;
+  padding:10px;
+  text-align:center;
 }
 
 tbody td:first-child{
-text-align:left;
-padding-left:15px;
+  text-align:left;
 }
 
+/* CATEGORIA */
 tr.category td{
-background:rgba(240,212,138,.05);
-font-weight:bold;
-color:var(--accent);
+  background:rgba(240,212,138,.06);
+  color:var(--accent);
+  font-weight:bold;
 }
 
+/* INPUT */
 input.calc{
-width:70px;
-padding:5px;
-border-radius:6px;
-border:1px solid #444;
-text-align:center;
-font-weight:bold;
+  width:70px;
+  padding:5px;
+  border-radius:6px;
+  border:1px solid #444;
+  text-align:center;
 }
+
+/* REMOVE SETAS */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{
+  -webkit-appearance:none;
+}
+
+input[type=number]{ -moz-appearance:textfield; }
 
 .total{
-color:var(--col);
-font-weight:bold;
+  color:var(--col);
+  font-weight:bold;
 }
 
 </style>
@@ -109,39 +137,35 @@ font-weight:bold;
 <body>
 
 <div class="header">
+  <img src="img/coruja.png">
 
-<img src="img/coruja.png">
+  <div class="titulos">
+    <h1>COMANDO DE POLÍCIA DE CHOQUE</h1>
+    <h2>AGÊNCIA REGIONAL DE INTELIGÊNCIA</h2>
+  </div>
 
-<div>
-<h1>COMANDO DE POLÍCIA DE CHOQUE</h1>
-<h2>AGÊNCIA REGIONAL DE INTELIGÊNCIA</h2>
+  <img src="img/coruja.png">
 </div>
 
-<img src="img/coruja.png">
-
+<!-- BOTÕES -->
+<div class="acoes">
+  <button onclick="salvarTudo()" class="btn-salvar">💾 Salvar</button>
+  <button onclick="limparTudo()" class="btn-limpar">🗑️ Limpar</button>
 </div>
 
 <table>
-
 <thead>
 <tr>
 <th>Drogas / Itens</th>
-<th>1° BPChq</th>
-<th>2° BPChq</th>
-<th>3° BPChq</th>
-<th>4° BPChq</th>
-<th>5° BPChq</th>
-<th>6° BPChq</th>
-<th>4° RPmon</th>
+<th>1°BPChq</th><th>2°BPChq</th><th>3°BPChq</th><th>4°BPChq</th>
+<th>5°BPChq</th><th>6°BPChq</th><th>4°RPMon</th>
 <th>Total</th>
 </tr>
 </thead>
 
 <tbody>
 
-<tr class="category">
-<td colspan="9">INDICADORES</td>
-</tr>
+<tr class="category"><td colspan="9">INDICADORES</td></tr>
 
 <tr>
 <td>Prisões</td>
@@ -178,10 +202,8 @@ font-weight:bold;
 <td><input class="calc" type="number"></td>
 <td class="total">0</td>
 </tr>
-   
-<tr class="category">
-<td colspan="9">DROGAS</td>
-</tr>
+
+<tr class="category"><td colspan="9">DROGAS</td></tr>
 
 <tr data-unit="g">
 <td>Cocaína</td>
@@ -231,7 +253,7 @@ font-weight:bold;
 <td class="total">0g</td>
 </tr>
 
-<tr data-unit="g">
+<tr data-unit="un">
 <td>Ecstasy</td>
 <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
 <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
@@ -255,8 +277,8 @@ font-weight:bold;
 <td class="total">0g</td>
 </tr>
 
-<tr data-unit="un">
-<td>Outras drogas</td>
+<tr data-unit="g">
+<td>Haxixe</td>
 <td><input class="calc" type="number"></td>
 <td><input class="calc" type="number"></td>
 <td><input class="calc" type="number"></td>
@@ -267,21 +289,45 @@ font-weight:bold;
 <td class="total">0un</td>
 </tr>
 
+<tr data-unit="un">
+<td>Lança perfume</td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td class="total">0un</td>
+</tr>
+
+<tr data-unit="g">
+<td>Outros</td>
+<td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
+<td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
+<td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
+<td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
+<td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
+<td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
+<td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
+<td class="total">0g</td>
+</tr>
+
 <tr class="category"><td colspan="9">APREENSÕES</td></tr>
 
 <tr>
 <td>Armas de fogo</td>
-<td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-<td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0</td>
-      </tr>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td class="total">0</td>
+</tr>
 
-      <tr>
+<tr>
         <td>Munições</td>
         <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
         <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
@@ -328,82 +374,88 @@ font-weight:bold;
         <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
         <td class="total">0</td>
       </tr>
-    
-</tbody>
 
+</tbody>
 </table>
 
 <script>
 
-const inputs = Array.from(document.querySelectorAll("input.calc"))
+document.addEventListener("DOMContentLoaded", () => {
 
 function recalcular(){
+  document.querySelectorAll("tbody tr").forEach(linha=>{
+    const inputs = linha.querySelectorAll("input.calc");
+    if(!inputs.length) return;
 
-const linhas = document.querySelectorAll("tbody tr")
+    let total=0;
+    inputs.forEach(inp=>{
+      total += parseFloat(inp.value) || 0;
+    });
 
-linhas.forEach(linha=>{
+    const unidade = linha.dataset.unit || "";
+    const campo = linha.querySelector(".total");
 
-const campos = linha.querySelectorAll("input.calc")
-
-if(campos.length==0)return
-
-let soma=0
-
-campos.forEach(c=>{
-const v=parseFloat(c.value)
-if(!isNaN(v))soma+=v
-})
-
-const total=linha.querySelector(".total")
-
-const unidade=linha.dataset.unit || ""
-
-total.textContent=unidade? soma+unidade : soma
-
-})
-
+    campo.textContent = unidade ? total + unidade : total;
+  });
 }
 
-document.addEventListener("input",e=>{
-if(e.target.classList.contains("calc"))recalcular()
-})
-
-inputs.forEach((input,index)=>{
-
-input.addEventListener("keydown",e=>{
-
-const colunas=7
-
-switch(e.key){
-
-case "ArrowRight":
-if(inputs[index+1])inputs[index+1].focus()
-break
-
-case "ArrowLeft":
-if(inputs[index-1])inputs[index-1].focus()
-break
-
-case "ArrowDown":
-case "Enter":
-if(inputs[index+colunas])inputs[index+colunas].focus()
-break
-
-case "ArrowUp":
-if(inputs[index-colunas])inputs[index-colunas].focus()
-break
-
-default:return
+/* SALVAR */
+function salvarTudo(){
+  document.querySelectorAll("input.calc").forEach((inp,i)=>{
+    localStorage.setItem("campo_"+i, inp.value);
+  });
+  alert("Dados salvos!");
 }
 
-e.preventDefault()
+/* CARREGAR */
+function carregar(){
+  document.querySelectorAll("input.calc").forEach((inp,i)=>{
+    const val = localStorage.getItem("campo_"+i);
+    if(val) inp.value = val;
+  });
+  recalcular();
+}
 
-})
+/* LIMPAR */
+function limparTudo(){
+  if(!confirm("Apagar tudo?")) return;
 
-})
+  document.querySelectorAll("input.calc").forEach((inp,i)=>{
+    localStorage.removeItem("campo_"+i);
+    inp.value="";
+  });
+
+  recalcular();
+}
+
+document.body.addEventListener("input", e=>{
+  if(e.target.matches("input.calc")){
+    recalcular();
+  }
+});
+
+/* NAVEGAÇÃO */
+const inputs = document.querySelectorAll("input.calc");
+
+inputs.forEach((inp,index)=>{
+  inp.addEventListener("keydown",e=>{
+    const colunas = 7;
+
+    if(e.key==="Enter" || e.key==="ArrowDown"){
+      if(inputs[index+colunas]) inputs[index+colunas].focus();
+    }
+  });
+});
+
+/* EXPOR */
+window.salvarTudo = salvarTudo;
+window.limparTudo = limparTudo;
+
+carregar();
+
+});
 
 </script>
 
 </body>
 </html>
-
