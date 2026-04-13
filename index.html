@@ -437,12 +437,40 @@ document.body.addEventListener("input", e=>{
 /* NAVEGAÇÃO */
 const inputs = document.querySelectorAll("input.calc");
 
-inputs.forEach((inp,index)=>{
-  inp.addEventListener("keydown",e=>{
+inputs.forEach((inp, index) => {
+  inp.addEventListener("keydown", e => {
     const colunas = 7;
 
-    if(e.key==="Enter" || e.key==="ArrowDown"){
-      if(inputs[index+colunas]) inputs[index+colunas].focus();
+    // ↓ desce
+    if (e.key === "Enter" || e.key === "ArrowDown") {
+      if (inputs[index + colunas]) {
+        e.preventDefault();
+        inputs[index + colunas].focus();
+      }
+    }
+
+    // ↑ sobe
+    if (e.key === "ArrowUp") {
+      if (inputs[index - colunas]) {
+        e.preventDefault();
+        inputs[index - colunas].focus();
+      }
+    }
+
+    // → direita
+    if (e.key === "ArrowRight") {
+      if (inputs[index + 1]) {
+        e.preventDefault();
+        inputs[index + 1].focus();
+      }
+    }
+
+    // ← esquerda
+    if (e.key === "ArrowLeft") {
+      if (inputs[index - 1]) {
+        e.preventDefault();
+        inputs[index - 1].focus();
+      }
     }
   });
 });
