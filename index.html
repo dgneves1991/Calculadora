@@ -16,7 +16,7 @@
 }
 
 body{
-  margin:0;
+    margin:0;
   font-family:Arial,Helvetica,sans-serif;
   background:var(--bg);
   color:#e6eef3;
@@ -156,7 +156,7 @@ input[type=number]{ -moz-appearance:textfield; }
 <table>
 <thead>
 <tr>
-<th>Drogas / Itens</th>
+<th>Produtividade</th>
 <th>1°BPChq</th><th>2°BPChq</th><th>3°BPChq</th><th>4°BPChq</th>
 <th>5°BPChq</th><th>6°BPChq</th><th>4°RPMon</th>
 <th>Total</th>
@@ -168,7 +168,31 @@ input[type=number]{ -moz-appearance:textfield; }
 <tr class="category"><td colspan="9">INDICADORES</td></tr>
 
 <tr>
-<td>Prisões</td>
+<td>Abordagem a pessoas</td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td class="total">0</td>
+</tr>
+
+<tr>
+<td>Abordagem a veículos</td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td class="total">0</td>
+</tr>
+
+<tr>
+<td>Prisões em Flagrante</td>
 <td><input class="calc" type="number"></td>
 <td><input class="calc" type="number"></td>
 <td><input class="calc" type="number"></td>
@@ -192,7 +216,55 @@ input[type=number]{ -moz-appearance:textfield; }
 </tr>
 
 <tr>
+<td>APF Tráfico</td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td class="total">0</td>
+</tr>
+
+<tr>
+<td>Arma de fogo</td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td class="total">0</td>
+</tr>
+
+<tr>
+<td>Munições</td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td class="total">0</td>
+</tr>
+
+<tr>
 <td>Dinheiro</td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td><input class="calc" type="number"></td>
+<td class="total">0</td>
+</tr>
+
+<tr>
+<td>Objetos apreendidos</td>
 <td><input class="calc" type="number"></td>
 <td><input class="calc" type="number"></td>
 <td><input class="calc" type="number"></td>
@@ -241,7 +313,7 @@ input[type=number]{ -moz-appearance:textfield; }
 <td class="total">0g</td>
 </tr>
 
-<tr data-unit="g">
+<tr data-unit="un">
 <td>MDMA</td>
 <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
 <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
@@ -265,8 +337,8 @@ input[type=number]{ -moz-appearance:textfield; }
 <td class="total">0g</td>
 </tr>
 
-<tr data-unit="g">
-<td>Outros</td>
+<tr data-unit="un">
+<td>LSD</td>
 <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
 <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
 <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
@@ -313,67 +385,6 @@ input[type=number]{ -moz-appearance:textfield; }
 <td class="total">0g</td>
 </tr>
 
-<tr class="category"><td colspan="9">APREENSÕES</td></tr>
-
-<tr>
-<td>Armas de fogo</td>
-<td><input class="calc" type="number"></td>
-<td><input class="calc" type="number"></td>
-<td><input class="calc" type="number"></td>
-<td><input class="calc" type="number"></td>
-<td><input class="calc" type="number"></td>
-<td><input class="calc" type="number"></td>
-<td><input class="calc" type="number"></td>
-<td class="total">0</td>
-</tr>
-
-<tr>
-        <td>Munições</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0</td>
-      </tr>
-
-      <tr>
-        <td>Celulares</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0</td>
-      </tr>
-
-      <tr>
-        <td>Veículos recuperados</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0</td>
-      </tr>
-
-      </tr>
-      <td>Veículos apreendidos</td>
-        <td class="bp1"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp2"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp3"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp4"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp5"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="bp6"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="rpm"><input class="calc" type="number" min="0" step="any"></td>
-        <td class="total">0</td>
-      </tr>
 
 </tbody>
 </table>
